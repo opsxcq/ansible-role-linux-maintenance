@@ -32,6 +32,6 @@ This task executes:
 
 ```yml
 - src: git+https://github.com/opsxcq/ansible-role-linux-maintenance.git
-  name: "opsxcq.host_backup"
+  name: "opsxcq.linux_maintenance"
 ```
 
