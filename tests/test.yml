@@ -1,0 +1,9 @@
+- hosts: all
+  vars:
+    maintenance_script:
+      apt update
+  tasks:
+  - name: My things
+    debug: msg="Some additional task here"
+  roles:
+    - ../..
