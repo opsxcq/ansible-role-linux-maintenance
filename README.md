@@ -31,7 +31,7 @@ This task executes:
 # Example requirements.yml
 
 ```yml
-- src: git+https://github.com/opsxcq/ansible-role-host-backup.git
+- src: git+https://github.com/opsxcq/ansible-role-linux-maintenance.git
   name: "opsxcq.host_backup"
 ```
 
