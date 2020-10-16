@@ -12,6 +12,10 @@
   apt:
     autoclean: yes
 
+- name: "Maintenance | Update apt"
+  apt:
+    update_cache: yes
+
 # Notice that we are not that kamikaze and won't purge volumes
 - name: "Maintenance | Clear docker containers"
   docker_prune:
