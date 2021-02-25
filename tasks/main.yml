@@ -5,6 +5,18 @@
   shell: "{{ maintenance_script }}"
   when: maintenance_script is defined
 
+- name: "Maintenance | Finding logs to clean"
+  find:
+    paths: /var/log
+    patterns: "*.gz"
+  register: find_results
+
+- name: "Maintenance | Cleanup compressed logs"
+  file:
+    path: "{{ item['path'] }}"
+    state: absent
+  with_items: "{{ find_results['files'] }}"
+
 - name: "Maintenance | Cleanup apt cache"
   apt:
     autoclean: yes
@@ -25,18 +37,6 @@
       "{{ docker_clean.containers_space_reclaimed
       + docker_clean.images_space_reclaimed }}
       bytes cleaned"
-
-- name: "Maintenance | Finding logs to clean"
-  find:
-    paths: /var/log
-    patterns: "*.gz"
-  register: find_results
-
-- name: "Maintenance | Cleanup compressed logs"
-  file:
-    path: "{{ item['path'] }}"
-    state: absent
-  with_items: "{{ find_results['files'] }}"
 
 - name: "Maintenance | Refresh gpg keys"
   shell: gpg --refresh-keys
