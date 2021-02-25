@@ -5,16 +5,9 @@
   shell: "{{ maintenance_script }}"
   when: maintenance_script is defined
 
-- name: "Maintenance | Refresh gpg keys"
-  shell: gpg --refresh-keys
-
 - name: "Maintenance | Cleanup apt cache"
   apt:
     autoclean: yes
-
-- name: "Maintenance | Update apt"
-  apt:
-    update_cache: yes
 
 # Notice that we are not that kamikaze and won't purge volumes
 - name: "Maintenance | Clear docker containers"
@@ -44,3 +37,10 @@
     path: "{{ item['path'] }}"
     state: absent
   with_items: "{{ find_results['files'] }}"
+
+- name: "Maintenance | Refresh gpg keys"
+  shell: gpg --refresh-keys
+
+- name: "Maintenance | Update apt"
+  apt:
+    update_cache: yes
