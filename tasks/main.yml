@@ -8,7 +8,7 @@
 - name: "Maintenance | Finding logs to clean"
   find:
     paths: /var/log
-    patterns: "*.gz"
+    patterns: "*.gz,*.1"
   register: find_results
 
 - name: "Maintenance | Cleanup compressed logs"
